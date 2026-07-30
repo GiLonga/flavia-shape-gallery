@@ -19,20 +19,13 @@ nav strip links back to it as "Flavia", so its filename can't move.
 | Dataset | Shapes | Classes | Flagged | Page |
 |---|--:|--:|--:|---|
 | Flavia | 1,907 | 32 | 0 | [index.html](index.html) |
-| BBBC010 | 1,407 | 2 | 0 | [bbbc010.html](bbbc010.html) |
+| BBBC010 | 1,407 | 2 | 2 | [bbbc010.html](bbbc010.html) |
 | HeLa Kyoto | 313 | 4 | 0 | [hela-kyoto.html](hela-kyoto.html) |
-| MOC | 650 | 3 | 0 | [moc.html](moc.html) |
+| MOC | 650 | 3 | 23 | [moc.html](moc.html) |
 | MPEG400 | 400 | 20 | 0 | [mpeg400.html](mpeg400.html) |
-| MPEG7 | 1,400 | 70 | 0 | [mpeg7.html](mpeg7.html) |
+| MPEG7 | 1,400 | 70 | 1 | [mpeg7.html](mpeg7.html) |
 | Mendeley | 9,000 | 9 | 0 | [mendeley.html](mendeley.html) |
-| Swedish SE/SL | 1,125 | 15 | 0 | [swedish-se-sl.html](swedish-se-sl.html) |
-
-All 33 originally-flagged shapes (2 in BBBC010, 23 in MOC, 1 in MPEG7, 7 in
-Swedish SE/SL — all self-intersections, none unfixable) were repaired in
-place in `test_scripts/cleaned_data/*_cleaned.npy` using the existing 2-opt/
-nearest-neighbor-reorder fix cascade from `test_scripts/curvature_check.py`
-(originals backed up alongside those files under
-`pre_self_intersection_fix_backup/`). Every dataset here is now 0 flagged.
+| Swedish SE/SL | 1,125 | 15 | 7 | [swedish-se-sl.html](swedish-se-sl.html) |
 
 Every page carries the same cross-dataset nav strip at the top, so you can
 jump between all eight from any one of them.
@@ -71,7 +64,7 @@ page to load or scroll. None of the other seven have that problem.
 No JavaScript anywhere: hover tooltips, the sticky class-nav bar,
 jump-to-class links, and the cross-dataset nav strip are all plain CSS/HTML
 (`:hover`, `position: sticky`, `<a href="#...">`). Each shape is downsampled
-to 100 points purely for thumbnail legibility (the tooltip's area figure
+to 56 points purely for thumbnail legibility (the tooltip's area figure
 comes from the full-resolution contour) and normalized into its own 100×100
 SVG viewBox so shapes of very different native sizes still render at a
 consistent thumbnail size.

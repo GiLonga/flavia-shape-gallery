@@ -40,7 +40,7 @@ from mendeley_400pt_flusser_rf import DATA_DIR, DATASETS, ROOT_DIR
 from shape_qc import _check_one
 
 GALLERY_DIR = os.path.join(ROOT_DIR, "galleries")
-N_RENDER_PTS = 100  # downsample 400 -> 100 pts/shape for lightweight SVGs
+N_RENDER_PTS = 56  # downsample 400 -> 56 pts/shape for lightweight SVGs
 
 # Filenames each dataset is deployed under in the flavia-shape-gallery repo
 # (Flavia stays "index.html" -- that's the site's original root page, and a
@@ -138,7 +138,7 @@ def build_gallery(name, contours_file, labels_file, pool, n_jobs, max_per_class=
     html_out = HTML_TEMPLATE.format(
         dataset=name, total=total, n_classes=len(class_ids), n_flagged=n_flagged,
         nav_pills=nav_pills, sections="".join(sections),
-        site_nav=build_site_nav(name), n_render_pts=N_RENDER_PTS,
+        site_nav=build_site_nav(name),
     )
 
     os.makedirs(GALLERY_DIR, exist_ok=True)
@@ -366,7 +366,7 @@ HTML_TEMPLATE = """<title>{dataset} — specimen plate</title>
 {sections}
 </main>
 
-<footer>Rendered at {n_render_pts} points/shape (downsampled from the native 400) purely for silhouette
+<footer>Rendered at 56 points/shape (downsampled from the native 400) purely for silhouette
 legibility at thumbnail scale — index and area above are computed from the full-resolution
 contour.</footer>
 """
