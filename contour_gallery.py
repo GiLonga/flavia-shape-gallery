@@ -60,12 +60,22 @@ PAGE_FILENAMES = {
     "Swedish_SE_SL": "swedish-se-sl.html",
 }
 
+# Pretty display name for each dataset key -- falls back to
+# name.replace("_", " ") for anything not listed here.
+DISPLAY_NAMES = {
+    "Swedish_SE_SL": "Swedish Leaves",
+}
+
+
+def display_name(name):
+    return DISPLAY_NAMES.get(name, name.replace("_", " "))
+
 
 def build_site_nav(current):
     links = []
     for name, page in PAGE_FILENAMES.items():
         active = ' aria-current="page"' if name == current else ""
-        links.append(f'<a href="{page}"{active}>{name.replace("_", " ")}</a>')
+        links.append(f'<a href="{page}"{active}>{display_name(name)}</a>')
     return "".join(links)
 
 
@@ -136,7 +146,7 @@ def build_gallery(name, contours_file, labels_file, pool, n_jobs, max_per_class=
 
     total = sum(len(v) for v in by_class.values())
     html_out = HTML_TEMPLATE.format(
-        dataset=name, total=total, n_classes=len(class_ids), n_flagged=n_flagged,
+        dataset=display_name(name), total=total, n_classes=len(class_ids), n_flagged=n_flagged,
         nav_pills=nav_pills, sections="".join(sections),
         site_nav=build_site_nav(name), n_render_pts=N_RENDER_PTS,
     )
@@ -149,7 +159,7 @@ def build_gallery(name, contours_file, labels_file, pool, n_jobs, max_per_class=
     return out_path
 
 
-HTML_TEMPLATE = """<title>{dataset} — specimen plate</title>
+HTML_TEMPLATE = """<title>{dataset}</title>
 <style>
   :root {{
     --bg: #10160f;
@@ -349,7 +359,7 @@ HTML_TEMPLATE = """<title>{dataset} — specimen plate</title>
 
 <header class="masthead">
   <p class="eyebrow">Varifold-Moments &middot; shape_qc pass</p>
-  <h1>{dataset} contours — specimen plate</h1>
+  <h1>{dataset} contours</h1>
   <p class="sub">Every cleaned {dataset} silhouette, grouped by class, for a quick visual scan.
      A rust outline marks a shape shape_qc.py flagged (non-finite coordinates, non-positive
      area, a turning number away from &plusmn;2&pi;, or a self-intersection).</p>

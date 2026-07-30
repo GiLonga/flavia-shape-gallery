@@ -25,10 +25,10 @@ nav strip links back to it as "Flavia", so its filename can't move.
 | MPEG400 | 400 | 20 | 0 | [mpeg400.html](mpeg400.html) |
 | MPEG7 | 1,400 | 70 | 0 | [mpeg7.html](mpeg7.html) |
 | Mendeley | 9,000 | 9 | 0 | [mendeley.html](mendeley.html) |
-| Swedish SE/SL | 1,125 | 15 | 0 | [swedish-se-sl.html](swedish-se-sl.html) |
+| Swedish Leaves | 1,125 | 15 | 0 | [swedish-se-sl.html](swedish-se-sl.html) |
 
 All 33 originally-flagged shapes (2 in BBBC010, 23 in MOC, 1 in MPEG7, 7 in
-Swedish SE/SL — all self-intersections, none unfixable) were repaired in
+Swedish Leaves — all self-intersections, none unfixable) were repaired in
 place in `test_scripts/cleaned_data/*_cleaned.npy`. The fix is deliberately
 the gentlest one that resolves each shape: a Gaussian smoothing pass over
 the point sequence *in its original order* (`sigma` 1–5, picked as the
