@@ -8,8 +8,7 @@ scan. Each shape also runs through the same finite-coordinate / positive-area
 — any shape that fails one gets a rust-colored outline instead of needing a
 separate CSV cross-referenced by hand.
 
-**Live page:** enabled via GitHub Pages on this repo (Settings → Pages once
-enabled) — see the repo's "About" section for the URL once it's live.
+**Live page:** https://gilonga.github.io/flavia-shape-gallery/
 
 ## What's here
 
