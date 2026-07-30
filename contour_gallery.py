@@ -42,6 +42,32 @@ from shape_qc import _check_one
 GALLERY_DIR = os.path.join(ROOT_DIR, "galleries")
 N_RENDER_PTS = 56  # downsample 400 -> 56 pts/shape for lightweight SVGs
 
+# Filenames each dataset is deployed under in the flavia-shape-gallery repo
+# (Flavia stays "index.html" -- that's the site's original root page, and a
+# shared link to it with a "#class-N" anchor must keep working, so it can't
+# move to its own flavia.html). Used only to build the cross-dataset nav
+# strip below; contour_gallery.py itself still writes every dataset to
+# galleries/{name}_gallery.html regardless of this mapping -- the rename
+# happens when copying into the deployed repo.
+PAGE_FILENAMES = {
+    "BBBC010": "bbbc010.html",
+    "Flavia": "index.html",
+    "HeLa_Kyoto": "hela-kyoto.html",
+    "MOC": "moc.html",
+    "MPEG400": "mpeg400.html",
+    "MPEG7": "mpeg7.html",
+    "Mendeley": "mendeley.html",
+    "Swedish_SE_SL": "swedish-se-sl.html",
+}
+
+
+def build_site_nav(current):
+    links = []
+    for name, page in PAGE_FILENAMES.items():
+        active = ' aria-current="page"' if name == current else ""
+        links.append(f'<a href="{page}"{active}>{name.replace("_", " ")}</a>')
+    return "".join(links)
+
 
 def shoelace_area(z):
     x, y = z.real, z.imag
@@ -112,6 +138,7 @@ def build_gallery(name, contours_file, labels_file, pool, n_jobs, max_per_class=
     html_out = HTML_TEMPLATE.format(
         dataset=name, total=total, n_classes=len(class_ids), n_flagged=n_flagged,
         nav_pills=nav_pills, sections="".join(sections),
+        site_nav=build_site_nav(name),
     )
 
     os.makedirs(GALLERY_DIR, exist_ok=True)
@@ -146,6 +173,26 @@ HTML_TEMPLATE = """<title>{dataset} — specimen plate</title>
     line-height: 1.5;
   }}
   a {{ color: inherit; }}
+
+  nav.sitenav {{
+    display: flex;
+    gap: 1.1rem;
+    flex-wrap: wrap;
+    padding: 0.7rem clamp(1.25rem, 4vw, 3rem);
+    background: var(--surface);
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+  }}
+  .sitenav a {{
+    color: var(--muted);
+    text-decoration: none;
+    padding-bottom: 0.15rem;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }}
+  .sitenav a:hover, .sitenav a:focus-visible {{ color: var(--ink); }}
+  .sitenav a[aria-current="page"] {{ color: var(--accent); border-color: var(--accent); }}
 
   header.masthead {{
     padding: 2.75rem clamp(1.25rem, 4vw, 3rem) 1.5rem;
@@ -297,6 +344,8 @@ HTML_TEMPLATE = """<title>{dataset} — specimen plate</title>
     font-family: var(--mono);
   }}
 </style>
+
+<nav class="sitenav">{site_nav}</nav>
 
 <header class="masthead">
   <p class="eyebrow">Varifold-Moments &middot; shape_qc pass</p>

@@ -23,6 +23,26 @@
   }
   a { color: inherit; }
 
+  nav.sitenav {
+    display: flex;
+    gap: 1.1rem;
+    flex-wrap: wrap;
+    padding: 0.7rem clamp(1.25rem, 4vw, 3rem);
+    background: var(--surface);
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+  }
+  .sitenav a {
+    color: var(--muted);
+    text-decoration: none;
+    padding-bottom: 0.15rem;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .sitenav a:hover, .sitenav a:focus-visible { color: var(--ink); }
+  .sitenav a[aria-current="page"] { color: var(--accent); border-color: var(--accent); }
+
   header.masthead {
     padding: 2.75rem clamp(1.25rem, 4vw, 3rem) 1.5rem;
     border-bottom: 1px solid var(--rule);
@@ -173,6 +193,8 @@
     font-family: var(--mono);
   }
 </style>
+
+<nav class="sitenav"><a href="bbbc010.html">BBBC010</a><a href="index.html" aria-current="page">Flavia</a><a href="hela-kyoto.html">HeLa Kyoto</a><a href="moc.html">MOC</a><a href="mpeg400.html">MPEG400</a><a href="mpeg7.html">MPEG7</a><a href="mendeley.html">Mendeley</a><a href="swedish-se-sl.html">Swedish SE SL</a></nav>
 
 <header class="masthead">
   <p class="eyebrow">Varifold-Moments &middot; shape_qc pass</p>
